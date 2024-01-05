@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const generateAuthToken = async (user) => {
     try {
         const payload = {
-            _id: user._id,
+            id: user.id,
         };
         const options = {
             expiresIn: process.env.JWT_EXPIRATION || '1h',
