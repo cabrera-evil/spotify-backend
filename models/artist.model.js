@@ -27,7 +27,8 @@ const ArtistModel = sequelize.define('Artist', {
 });
 
 ArtistModel.hasMany(AlbumModel, {
-    foreignKey: 'artistId'
+    foreignKey: 'artistId',
+    onDelete: 'CASCADE',
 });
 
 module.exports = ArtistModel;

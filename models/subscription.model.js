@@ -22,6 +22,7 @@ const SubscriptionModel = sequelize.define('Subscription', {
 
 SubscriptionModel.hasMany(PaymentModel, {
     foreignKey: 'subscriptionId',
+    onDelete: 'CASCADE',
 });
 
 module.exports = SubscriptionModel;

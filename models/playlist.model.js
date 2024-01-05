@@ -20,8 +20,8 @@ const PlaylistModel = sequelize.define('Playlist', {
     },
 });
 
-PlaylistModel.hasMany(SongModel, {
-    foreignKey: 'playlistId'
+PlaylistModel.belongsToMany(SongModel, {
+    through: 'PlaylistSongs'
 });
 
 module.exports = PlaylistModel;

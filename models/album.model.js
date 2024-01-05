@@ -25,7 +25,8 @@ const AlbumModel = sequelize.define('Album', {
 });
 
 AlbumModel.hasMany(SongModel, {
-    foreignKey: 'albumId'
+    foreignKey: 'albumId',
+    onDelete: 'CASCADE',
 });
 
 module.exports = AlbumModel;

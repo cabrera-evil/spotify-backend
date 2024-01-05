@@ -55,17 +55,21 @@ const UserModel = sequelize.define('User', {
 });
 
 UserModel.hasMany(CreditCard, {
-    foreignKey: 'userId'
+    foreignKey: 'userId',
+    onDelete: 'CASCADE',
 });
 UserModel.hasMany(PaypalModel, {
-    foreignKey: 'userId'
+    foreignKey: 'userId',
+    onDelete: 'CASCADE',
 });
 UserModel.hasOne(SubscriptionModel, {
-    foreignKey: 'userId'
+    foreignKey: 'userId',
+    onDelete: 'CASCADE',
 });
 
-UserModel.hasOne(PlaylistModel, {
-    foreignKey: 'userId'
+UserModel.hasMany(PlaylistModel, {
+    foreignKey: 'userId',
+    onDelete: 'CASCADE',
 });
 
 module.exports = UserModel;
