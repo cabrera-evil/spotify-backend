@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config');
-const Payment = require('./payment.model');
+const PaymentModel = require('./payment.model');
 
-const Subscription = sequelize.define('Subscription', {
+const SubscriptionModel = sequelize.define('Subscription', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -20,8 +20,8 @@ const Subscription = sequelize.define('Subscription', {
     },
 });
 
-Subscription.hasMany(Payment, {
+SubscriptionModel.hasMany(PaymentModel, {
     foreignKey: 'subscriptionId',
 });
 
-module.exports = Subscription;
+module.exports = SubscriptionModel;

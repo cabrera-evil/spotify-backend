@@ -1,25 +1,26 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config');
+const AlbumModel = require('./album.model');
 
-const PaymentModel = sequelize.define('Payment', {
+const ArtistModel = sequelize.define('Artist', {
     id: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
         autoIncrement: true,
-    },
-    date: {
-        type: DataTypes.DATE,
+        primaryKey: true,
         allowNull: false,
     },
-    orderNumber: {
+    name: {
         type: DataTypes.STRING,
-        unique: true,
         allowNull: false,
     },
-    total: {
-        type: DataTypes.FLOAT,
+    picture: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
 });
 
-module.exports = PaymentModel;
+ArtistModel.hasMany(AlbumModel, {
+    foreignKey: 'artistId'
+});
+
+module.exports = ArtistModel;

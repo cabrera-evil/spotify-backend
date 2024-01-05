@@ -1,10 +1,11 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config');
 const CreditCard = require('./creditCard.model');
-const Paypal = require('./paypal.model');
-const Subscription = require('./subscription.model');
+const PaypalModel = require('./paypal.model');
+const SubscriptionModel = require('./subscription.model');
+const PlaylistModel = require('./playlist.model');
 
-const User = sequelize.define('User', {
+const UserModel = sequelize.define('User', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -53,14 +54,18 @@ const User = sequelize.define('User', {
     },
 });
 
-User.hasMany(CreditCard, {
+UserModel.hasMany(CreditCard, {
     foreignKey: 'userId'
 });
-User.hasMany(Paypal, {
+UserModel.hasMany(PaypalModel, {
     foreignKey: 'userId'
 });
-User.hasOne(Subscription, {
+UserModel.hasOne(SubscriptionModel, {
     foreignKey: 'userId'
 });
 
-module.exports = User;
+UserModel.hasOne(PlaylistModel, {
+    foreignKey: 'userId'
+});
+
+module.exports = UserModel;

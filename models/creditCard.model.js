@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config');
 
-const CreditCard = sequelize.define('CreditCard', {
+const CreditCardModel = sequelize.define('CreditCard', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -25,4 +25,4 @@ const CreditCard = sequelize.define('CreditCard', {
     },
 });
 
-module.exports = CreditCard;
+module.exports = CreditCardModel;
