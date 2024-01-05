@@ -102,7 +102,7 @@ const updateUser = async (id, user) => {
 const deleteUser = async (id) => {
     try {
         const [rowsUpdated, [deletedUser]] = await UserModel.update(
-            { active: false },
+            { status: false },
             {
                 where: { id: id },
                 returning: true,

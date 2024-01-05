@@ -48,7 +48,7 @@ const UserModel = sequelize.define('User', {
         type: DataTypes.ENUM('user', 'admin'),
         defaultValue: 'user',
     },
-    active: {
+    status: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
     },
