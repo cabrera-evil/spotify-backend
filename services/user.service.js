@@ -102,15 +102,14 @@ const updateUser = async (id, user) => {
 const deleteUser = async (id) => {
     try {
         const [rowsUpdated, [deletedUser]] = await UserModel.update(
-            { active: false },
+            { status: false },
             {
                 where: { id: id },
                 returning: true,
             }
         );
-        if (rowsUpdated === 0) {
+        if (rowsUpdated === 0)
             throw new Error('User not found');
-        }
         return deletedUser;
     } catch (error) {
         throw new Error(error.message);

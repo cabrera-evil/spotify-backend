@@ -1,25 +1,26 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config');
 
-const PaymentModel = sequelize.define('Payment', {
+const SongModel = sequelize.define('Song', {
     id: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
         autoIncrement: true,
-    },
-    date: {
-        type: DataTypes.DATE,
+        primaryKey: true,
         allowNull: false,
     },
-    orderNumber: {
+    name: {
         type: DataTypes.STRING,
+        allowNull: false,
         unique: true,
+    },
+    duration: {
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
-    total: {
-        type: DataTypes.FLOAT,
+    timesPlayed: {
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
 });
 
-module.exports = PaymentModel;
+module.exports = SongModel;
