@@ -11,10 +11,14 @@ require('dotenv').config();
 // Load db config
 require('./config/db.config');
 
+// Load passport config
+const passport = require('./config/passport.config');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var artistsRouter = require('./routes/artists');
 var albumRouter = require('./routes/albums');
+var authRouter = require('./routes/auth');
 
 var app = express();
 
@@ -28,11 +32,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+app.use(passport.initialize());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/artists', artistsRouter);
 app.use('/albums', albumRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

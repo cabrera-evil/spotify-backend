@@ -2,25 +2,6 @@ const UserModel = require('../models/user.model');
 const CreditCardModel = require('../models/creditCard.model');
 const PaypalModel = require('../models/paypal.model');
 const SubscriptionModel = require('../models/subscription.model');
-const hashPassword = require('../helpers/hashPassword.helper');
-
-/**
- * @description Create a new user
- * @param {Object} user
- * @returns {Object} User created
- */
-const createUser = async (user) => {
-    try {
-        user.password = await hashPassword(user.password);
-        const newUser = await UserModel.create(user);
-        await SubscriptionModel.create({
-            userId: newUser.id,
-        });
-        return newUser;
-    } catch (error) {
-        throw new Error(error.message);
-    }
-}
 
 /**
  * @description Get all users
@@ -117,7 +98,6 @@ const deleteUser = async (id) => {
 };
 
 module.exports = {
-    createUser,
     getUsers,
     getUser,
     updateUser,
