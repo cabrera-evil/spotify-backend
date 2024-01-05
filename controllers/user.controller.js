@@ -9,7 +9,7 @@ const createUser = async (req, res) => {
     }
 }
 
-const getUsers = async (res) => {
+const getUsers = async (req, res) => {
     try {
         const users = await userService.getUsers();
         res.status(200).json({ message: 'Users retrieved', data: users });

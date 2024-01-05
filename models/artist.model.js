@@ -12,10 +12,17 @@ const ArtistModel = sequelize.define('Artist', {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
     },
     picture: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: '',
+    },
+    status: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
     },
 });
 

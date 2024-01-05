@@ -108,9 +108,8 @@ const deleteUser = async (id) => {
                 returning: true,
             }
         );
-        if (rowsUpdated === 0) {
+        if (rowsUpdated === 0)
             throw new Error('User not found');
-        }
         return deletedUser;
     } catch (error) {
         throw new Error(error.message);
