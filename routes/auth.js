@@ -4,6 +4,7 @@ const { check } = require("express-validator");
 const authController = require('../controllers/auth.controller');
 
 // Middlewares
+const authenticateToken = require('../middlewares/authenticateToken.middleware');
 const validateRequest = require("../middlewares/validateRequest.middleware");
 
 router.post('/register', [
@@ -22,5 +23,9 @@ router.post('/login', [
     check('password').isLength({ min: 6 }),
     validateRequest,
 ], authController.login);
+
+router.post('/profile', [
+    authenticateToken,
+], authController.profile);
 
 module.exports = router;

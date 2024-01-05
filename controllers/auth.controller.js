@@ -18,7 +18,16 @@ const login = async (req, res) => {
     }
 }
 
+const profile = async (req, res) => {
+    try {
+        res.status(200).json({ message: 'User profile', data: req.user });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 module.exports = {
     register,
     login,
+    profile,
 }
