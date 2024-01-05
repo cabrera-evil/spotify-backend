@@ -29,14 +29,15 @@ const register = async (user) => {
  */
 const login = async (user) => {
     try {
-        const foundUser = await UserModel.findOne({ email: user.email });
+        const foundUser = await UserModel.findOne({
+            where: {
+                username: user.username,
+            },
+        });
+        if (!foundUser) throw new Error('User not found');
         const isMatch = await verifyPassword(user.password, foundUser.password);
+        if (!isMatch) throw new Error('Wrong password');
         const token = await generateAuthToken(foundUser);
-
-        if (!isMatch || !foundUser) {
-            throw new Error('Unauthorized');
-        }
-
         return {
             user: foundUser,
             token,
