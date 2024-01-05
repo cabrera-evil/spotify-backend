@@ -1,6 +1,8 @@
-// User.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config');
+const CreditCard = require('./creditCard.model');
+const Paypal = require('./paypal.model');
+const Subscription = require('./subscription.model');
 
 const User = sequelize.define('User', {
     id: {
@@ -49,6 +51,16 @@ const User = sequelize.define('User', {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
     },
+});
+
+User.hasMany(CreditCard, {
+    foreignKey: 'userId'
+});
+User.hasMany(Paypal, {
+    foreignKey: 'userId'
+});
+User.hasOne(Subscription, {
+    foreignKey: 'userId'
 });
 
 module.exports = User;
