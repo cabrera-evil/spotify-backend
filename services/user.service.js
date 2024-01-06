@@ -66,9 +66,7 @@ const updateUser = async (id, user) => {
             where: { id: id },
             returning: true,
         });
-        if (rowsUpdated === 0) {
-            throw new Error('User not found');
-        }
+        if (rowsUpdated === 0) throw new Error('User not found');
         return updatedUser;
     } catch (error) {
         throw new Error(error.message);
@@ -89,8 +87,7 @@ const deleteUser = async (id) => {
                 returning: true,
             }
         );
-        if (rowsUpdated === 0)
-            throw new Error('User not found');
+        if (rowsUpdated === 0) throw new Error('User not found');
         return deletedUser;
     } catch (error) {
         throw new Error(error.message);

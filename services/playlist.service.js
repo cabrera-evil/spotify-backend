@@ -9,10 +9,7 @@ const SongModel = require('../models/song.model');
  */
 const createPlaylist = async (playlist, userId) => {
     try {
-        // Create playlist with userId
         const newPlaylist = await PlaylistModel.create({ ...playlist, userId });
-
-        // Return playlist
         return newPlaylist;
     } catch (error) {
         throw new Error(error.message);
@@ -26,7 +23,6 @@ const createPlaylist = async (playlist, userId) => {
  */
 const getPlaylists = async (userId) => {
     try {
-        // Get playlists with userId
         const playlists = await PlaylistModel.findAll({
             where: { userId, status: true },
             include: [
@@ -39,8 +35,6 @@ const getPlaylists = async (userId) => {
                 }
             ]
         });
-
-        // Return playlists
         return playlists;
     } catch (error) {
         throw new Error(error.message);
@@ -82,15 +76,15 @@ const addSongToPlaylist = async (playlistId, songId) => {
     try {
         // If the playlist is not owned by the user or does not exist, throw an error
         const playlist = await PlaylistModel.findOne({ where: { id: playlistId } });
-        if(!playlist) throw new Error('Playlist not found');
-        
+        if (!playlist) throw new Error('Playlist not found');
+
         // If the song does not exist, throw an error
         const song = await SongModel.findOne({ where: { id: songId } });
-        if(!song) throw new Error('Song not found');
+        if (!song) throw new Error('Song not found');
 
         // If the song is already in the playlist, throw an error
         const songInPlaylist = await playlist.hasSong(song);
-        if(songInPlaylist) throw new Error('Song already in playlist');
+        if (songInPlaylist) throw new Error('Song already in playlist');
 
         // Add song to playlist
         await playlist.addSong(song);
@@ -115,9 +109,7 @@ const recoverPlaylist = async (id) => {
             returning: true
         });
 
-        if (rowsUpdated === 0) {
-            throw new Error('Playlist not found');
-        }
+        if (rowsUpdated === 0) throw new Error('Playlist not found');
 
         return updatedPlaylist;
     } catch (error) {
@@ -137,9 +129,7 @@ const updatePlaylist = async (id, playlistName) => {
             where: { id },
             returning: true
         });
-        if (rowsUpdated === 0) {
-            throw new Error('Playlist not found');
-        }
+        if (rowsUpdated === 0) throw new Error('Playlist not found');
         return updatedPlaylist;
     } catch (error) {
         throw new Error(error.message);
@@ -153,7 +143,7 @@ const updatePlaylist = async (id, playlistName) => {
  */
 const deletePlaylist = async (id) => {
     try {
-        // Obtén la fecha actual
+        // Get the current date
         const currentDate = new Date();
 
         // Update the status to false and save the deletedAt date
@@ -182,15 +172,15 @@ const removeSongFromPlaylist = async (playlistId, songId) => {
     try {
         // If the playlist is not owned by the user or does not exist, throw an error
         const playlist = await PlaylistModel.findOne({ where: { id: playlistId } });
-        if(!playlist) throw new Error('Playlist not found');
-        
+        if (!playlist) throw new Error('Playlist not found');
+
         // If the song does not exist, throw an error
         const song = await SongModel.findOne({ where: { id: songId } });
-        if(!song) throw new Error('Song not found');
+        if (!song) throw new Error('Song not found');
 
         // If the song is not in the playlist, throw an error
         const songInPlaylist = await playlist.hasSong(song);
-        if(!songInPlaylist) throw new Error('Song not in playlist');
+        if (!songInPlaylist) throw new Error('Song not in playlist');
 
         // Remove song from playlist
         await playlist.removeSong(song);

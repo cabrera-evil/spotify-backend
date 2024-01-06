@@ -55,8 +55,7 @@ const updateArtist = async (id, artist) => {
             where: { id },
             returning: true,
         });
-        if (rowsUpdated === 0)
-            throw new Error('Artist not found');
+        if (rowsUpdated === 0) throw new Error('Artist not found');
         return updatedArtist;
     } catch (error) {
         throw new Error(error.message);
@@ -77,8 +76,7 @@ const deleteArtist = async (id) => {
                 returning: true,
             }
         );
-        if (rowsUpdated === 0)
-            throw new Error('Artist not found');
+        if (rowsUpdated === 0) throw new Error('Artist not found');
         return deletedArtist;
     } catch (error) {
         throw new Error(error.message);

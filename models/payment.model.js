@@ -7,10 +7,6 @@ const PaymentModel = sequelize.define('Payment', {
         primaryKey: true,
         autoIncrement: true,
     },
-    date: {
-        type: DataTypes.DATE,
-        allowNull: false,
-    },
     orderNumber: {
         type: DataTypes.STRING,
         unique: true,

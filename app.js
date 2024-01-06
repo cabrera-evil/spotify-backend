@@ -20,6 +20,7 @@ var artistsRouter = require('./routes/artists.routes');
 var albumRouter = require('./routes/albums.routes');
 var authRouter = require('./routes/auth.routes');
 var playlistRouter = require('./routes/playlists.routes');
+var subscriptionRouter = require('./routes/subscription.routes');
 
 var app = express();
 
@@ -41,6 +42,7 @@ app.use('/artists', artistsRouter);
 app.use('/albums', albumRouter);
 app.use('/auth', authRouter);
 app.use('/playlists', playlistRouter);
+app.use('/subscription', subscriptionRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

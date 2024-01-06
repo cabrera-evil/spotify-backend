@@ -7,7 +7,7 @@ const CreditCardModel = sequelize.define('CreditCard', {
         primaryKey: true,
         autoIncrement: true,
     },
-    cardNumber: {
+    number: {
         type: DataTypes.STRING,
         allowNull: false,
     },
