@@ -8,19 +8,19 @@ const authenticateToken = require('../middlewares/authenticateToken.middleware')
 const validateRequest = require("../middlewares/validateRequest.middleware");
 
 router.post('/register', [
-    check('username').isLength({ min: 2 }),
-    check('email').isEmail(),
-    check('password').isLength({ min: 6 }),
-    check('birthDate').matches(/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/),
-    check('sex').isString(),
-    check('country').isString(),
-    check('zipCode').isString(),
+    check('username').isString().isLength({ min: 2 }).notEmpty(),
+    check('email').isEmail().notEmpty(),
+    check('password').isString().isLength({ min: 6 }).notEmpty(),
+    check('birthDate').isString().matches(/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/).notEmpty(),
+    check('sex').isString().notEmpty(),
+    check('country').isString().notEmpty(),
+    check('zipCode').isString().notEmpty(),
     validateRequest,
 ], authController.register);
 
 router.post('/login', [
-    check('username').isLength({ min: 2 }),
-    check('password').isLength({ min: 6 }),
+    check('username').isString().isLength({ min: 2 }).notEmpty(),
+    check('password').isString().isLength({ min: 6 }).notEmpty(),
     validateRequest,
 ], authController.login);
 

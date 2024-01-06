@@ -1,6 +1,11 @@
 const AlbumModel = require('../models/album.model');
 const SongModel = require('../models/song.model');
 
+/**
+ * @description Create an album
+ * @param {Object} album Album object
+ * @returns {Promise<Object>} Promise to be resolved with the created album
+ */
 const createAlbum = async (request) => {
     try {
         const { album, songs } = request;
@@ -18,6 +23,10 @@ const createAlbum = async (request) => {
     }
 }
 
+/**
+ * @description Get all albums
+ * @returns {Promise<Array>} Promise to be resolved with an array of albums
+ */
 const getAlbums = async () => {
     try {
         return await AlbumModel.findAll({
@@ -33,6 +42,11 @@ const getAlbums = async () => {
     }
 }
 
+/**
+ * @description Get an album by id
+ * @param {number} id Album id
+ * @returns {Promise<Object>} Promise to be resolved with the album
+ */
 const getAlbum = async (id) => {
     try {
         return await AlbumModel.findByPk(id, {
@@ -48,6 +62,12 @@ const getAlbum = async (id) => {
     }
 }
 
+/**
+ * @description Update an album
+ * @param {number} id Album id
+ * @param {Object} album Album object
+ * @returns {Promise<Object>} Promise to be resolved with the updated album
+ */
 const updateAlbum = async (id, album) => {
     try {
         const [rowsUpdated, [updatedAlbum]] = await AlbumModel.update(album, {
@@ -61,6 +81,11 @@ const updateAlbum = async (id, album) => {
     }
 }
 
+/**
+ * @description Delete an album
+ * @param {number} id Album id
+ * @returns {Promise<Object>} Promise to be resolved with the deleted album
+ */
 const deleteAlbum = async (id) => {
     try {
         const album = await AlbumModel.findByPk(id);

@@ -11,8 +11,13 @@ const validateRole = require('../middlewares/validateRole.middleware');
 router.post('/', [
     authenticateToken,
     validateRole(['admin']),
-    check('name').isLength({ min: 2 }),
-    check('releaseDate').isDate(),
+    check('album.name').isLength({ min: 2 }).isString().notEmpty(),
+    check('album.releaseDate').isString().matches(/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/).notEmpty(),
+    check('album.cover').isURL().optional(),
+    check('songs').isArray({ min: 1 }).notEmpty(),
+    check('songs.*.name').isString().isLength({ min: 2 }).notEmpty(),
+    check('songs.*.duration').isInt({ min: 1 }).notEmpty(),
+    check('songs.*.timesPlayed').isInt({ min: 0 }).optional(),
     validateRequest,
 ], albumController.createAlbum);
 
@@ -23,9 +28,11 @@ router.get('/:id', albumController.getAlbum);
 router.patch('/:id', [
     authenticateToken,
     validateRole(['admin']),
-    check('name').isLength({ min: 2 }),
-    check('releaseDate').isDate(),
-    check('status').isBoolean(),
+    check('album.name').isString().isLength({ min: 2 }).optional(),
+    check('album.releaseDate').isString().matches(/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/).optional(),
+    check('songs').isArray({ min: 1 }).optional(),
+    check('songs.*.name').isLength({ min: 2 }).optional(),
+    check('songs.*.duration').isInt({ min: 1 }).optional(),
     validateRequest,
 ], albumController.updateAlbum);
 

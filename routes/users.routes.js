@@ -1,35 +1,34 @@
 var express = require('express');
 var router = express.Router();
 const { check } = require("express-validator");
-const artistController = require('../controllers/artist.controller');
+const userController = require('../controllers/user.controller');
 
 // Middlewares
 const authenticateToken = require('../middlewares/authenticateToken.middleware');
 const validateRequest = require("../middlewares/validateRequest.middleware");
 const validateRole = require('../middlewares/validateRole.middleware');
 
-router.post('/', [
+router.get('/', [
     authenticateToken,
     validateRole(['admin']),
-    check('name').isLength({ min: 2 }),
-    validateRequest,
-], artistController.createArtist);
+], userController.getUsers);
 
-router.get('/', artistController.getArtists);
-
-router.get('/:id', artistController.getArtistById);
+router.get('/:id', [
+    authenticateToken,
+    validateRole(['admin']),
+], userController.getUser);
 
 router.patch('/:id', [
     authenticateToken,
     validateRole(['admin']),
-    check('name').isLength({ min: 2 }),
-    check('status').isBoolean(),
+    check('email').isEmail().optional(),
+    check('password').isString().isLength({ min: 6 }).optional(),
     validateRequest,
-], artistController.updateArtist);
+], userController.updateUser);
 
 router.delete('/:id', [
     authenticateToken,
     validateRole(['admin']),
-], artistController.deleteArtist);
+], userController.deleteUser);
 
 module.exports = router;
