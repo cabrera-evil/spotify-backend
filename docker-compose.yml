@@ -19,7 +19,7 @@ services:
     image: postgres:latest
     restart: always
     ports:
-      - 5433:5432
+      - 5432:5432
     container_name: spotify-database
     env_file:
       - .env.production
