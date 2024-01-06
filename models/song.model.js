@@ -20,6 +20,7 @@ const SongModel = sequelize.define('Song', {
     timesPlayed: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 0,
     },
 });
 

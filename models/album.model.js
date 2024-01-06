@@ -21,6 +21,7 @@ const AlbumModel = sequelize.define('Album', {
     cover: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: '',
     },
 });
 

@@ -21,8 +21,8 @@ router.get('/:id', [
 router.patch('/:id', [
     authenticateToken,
     validateRole(['admin']),
-    check('email').isEmail(),
-    check('password').isLength({ min: 6 }),
+    check('email').isEmail().optional(),
+    check('password').isLength({ min: 6 }).optional(),
     validateRequest,
 ], userController.updateUser);
 

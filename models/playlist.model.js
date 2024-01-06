@@ -17,7 +17,18 @@ const PlaylistModel = sequelize.define('Playlist', {
     songCount: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 0
     },
+    status: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
+    },
+    deletedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: null
+    }
 });
 
 PlaylistModel.belongsToMany(SongModel, {
