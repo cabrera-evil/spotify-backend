@@ -151,11 +151,8 @@ const deletePlaylist = async (id) => {
             where: { id },
             returning: true
         });
-
-        if (rowsUpdated === 0) {
-            throw new Error('Playlist not found');
-        }
-
+        
+        if (rowsUpdated === 0) throw new Error('Playlist not found');
         return updatedPlaylist;
     } catch (error) {
         throw new Error(error.message);

@@ -22,7 +22,7 @@ const sequelize = new Sequelize({
 })();
 
 // Sync the models with the database
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   debug('Database synchronized successfully.');
 }).catch((error) => {
   debug('Error syncing database:', error);
