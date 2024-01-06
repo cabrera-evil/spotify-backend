@@ -8,10 +8,10 @@ const authenticateToken = require('../middlewares/authenticateToken.middleware')
 const validateRequest = require("../middlewares/validateRequest.middleware");
 
 router.post('/register', [
-    check('username').isLength({ min: 2 }).notEmpty(),
+    check('username').isString().isLength({ min: 2 }).notEmpty(),
     check('email').isEmail().notEmpty(),
-    check('password').isLength({ min: 6 }).notEmpty(),
-    check('birthDate').matches(/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/).notEmpty(),
+    check('password').isString().isLength({ min: 6 }).notEmpty(),
+    check('birthDate').isString().matches(/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/).notEmpty(),
     check('sex').isString().notEmpty(),
     check('country').isString().notEmpty(),
     check('zipCode').isString().notEmpty(),
@@ -19,8 +19,8 @@ router.post('/register', [
 ], authController.register);
 
 router.post('/login', [
-    check('username').isLength({ min: 2 }).notEmpty(),
-    check('password').isLength({ min: 6 }).notEmpty(),
+    check('username').isString().isLength({ min: 2 }).notEmpty(),
+    check('password').isString().isLength({ min: 6 }).notEmpty(),
     validateRequest,
 ], authController.login);
 

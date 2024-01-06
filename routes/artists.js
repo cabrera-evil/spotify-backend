@@ -22,7 +22,7 @@ router.get('/:id', artistController.getArtistById);
 router.patch('/:id', [
     authenticateToken,
     validateRole(['admin']),
-    check('name').isLength({ min: 2 }).notEmpty(),
+    check('name').isString().isLength({ min: 2 }).notEmpty(),
     check('picture').isURL().optional(),
     check('status').isBoolean().optional(),
     validateRequest,
