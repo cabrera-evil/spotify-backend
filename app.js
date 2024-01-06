@@ -14,12 +14,12 @@ require('./config/db.config');
 // Load passport config
 const passport = require('./config/passport.config');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var artistsRouter = require('./routes/artists');
-var albumRouter = require('./routes/albums');
-var authRouter = require('./routes/auth');
-var playlistRouter = require('./routes/playlists');
+var indexRouter = require('./routes/index.routes');
+var usersRouter = require('./routes/users.routes');
+var artistsRouter = require('./routes/artists.routes');
+var albumRouter = require('./routes/albums.routes');
+var authRouter = require('./routes/auth.routes');
+var playlistRouter = require('./routes/playlists.routes');
 
 var app = express();
 
