@@ -17,7 +17,7 @@ const ArtistModel = sequelize.define('Artist', {
     picture: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: '',
+        defaultValue: 'https://res.cloudinary.com/cabrera-evil/image/upload/v1704667712/spotify/artists/no-profile-picture.png',
     },
     status: {
         type: DataTypes.BOOLEAN,

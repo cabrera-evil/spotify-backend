@@ -21,7 +21,7 @@ const AlbumModel = sequelize.define('Album', {
     cover: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: '',
+        defaultValue: 'https://res.cloudinary.com/cabrera-evil/image/upload/v1704667562/spotify/albums/no-album-cover.jpg',
     },
 });
 
